@@ -9,10 +9,40 @@ import sys
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, project_root)
 
-from process_data.data_loader import load_quran_data
-from process_data.chunking import process_surah_chunks
+from process_data.data_loader import load_quran_data, load_hadith_data
+from process_data.chunking import process_surah_chunks, process_hadith_chunks
 from config import driver
 from tqdm import tqdm
+
+def insert_hadith_chunks():
+    """
+    Load Hadith JSON data and insert all nodes and relationships into Neo4j.
+    """
+    hadith_json_path = os.path.join(project_root, 'hadis.json')
+    
+    try:
+        hadith_data = load_hadith_data(hadith_json_path)
+
+        with driver.session() as session:
+            session.run("CREATE (:Hadith {name: 'Shahih Bukhari'})")
+
+            progress = tqdm(total=len(hadith_data), desc="Memproses Hadis")
+
+            for item in hadith_data:
+                process_hadith_chunks(item, session)
+                progress.update(1)
+
+            progress.close()
+            print("\n✅ Semua data Hadis dan chunk embedding berhasil dimasukkan ke Neo4j.")
+
+    except FileNotFoundError:
+        print(f"❌ File hadis.json tidak ditemukan di {hadith_json_path}")
+        sys.exit(1)
+    except Exception as e:
+        print(f"❌ Error saat insert Hadis: {str(e)}")
+        sys.exit(1)
+    finally:
+        driver.close()
 
 def insert_quran_chunks():
     """
@@ -28,8 +58,8 @@ def insert_quran_chunks():
 
         with driver.session() as session:
             # Reset all existing data
-            session.run("MATCH (n) DETACH DELETE n")
-            session.run("CREATE (:Quran {name: 'Al-Quran'})")
+            # session.run("MATCH (n) DETACH DELETE n")
+            # session.run("CREATE (:Quran {name: 'Al-Quran'})")
 
             total_ayat = sum(len(surah["text"]) for surah in quran_data)
             progress = tqdm(total=total_ayat, desc="Memproses Ayat")
@@ -52,3 +82,5 @@ def insert_quran_chunks():
 
 if __name__ == "__main__":
     insert_quran_chunks()
+    insert_hadith_chunks()
+    print("Semua data berhasil dimasukkan ke dalam Neo4j.")

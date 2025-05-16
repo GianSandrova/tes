@@ -3,7 +3,8 @@
 from retrieval.input_validation import validate_input
 from retrieval.topic_detector import is_topic_changed, get_last_question
 from retrieval.embedding import embed_combined
-from retrieval.retrieval import vector_search_chunks, build_chunk_context
+from retrieval.retrieval import vector_search_chunks_generator
+from retrieval.context_builder import build_chunk_context_interleaved
 from generation import generate_answer
 import streamlit as st
 
@@ -38,12 +39,12 @@ def process_user_query(teks_pertanyaan):
         st.session_state.history.clear()
 
     combined_query = build_semantic_query(teks_pertanyaan, st.session_state.history)
-    results = vector_search_chunks(combined_query, top_k=10, min_score=0.6)
+    results = vector_search_chunks_generator(combined_query, top_k=20, min_score=0.6)
 
     if not results:
         return "❌ Maaf, saya tidak menemukan potongan yang relevan untuk menjawab pertanyaan ini."
 
-    context = build_chunk_context(results)
+    context = build_chunk_context_interleaved(combined_query, top_k=4, min_score=0.6)
     answer = generate_answer(teks_pertanyaan, context, history=st.session_state.history)
 
     # Kirim jawaban ke pengguna
