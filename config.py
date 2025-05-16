@@ -13,5 +13,6 @@ EMBEDDING_PROPERTY = "embedding"  # Properti yang menyimpan embedding
 # Koneksi ke Neo4j
 driver = GraphDatabase.driver(URI, auth=AUTH)
 
+DIMENSION_STRUCTURAL = 128
 GROQ_API_KEY = "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"
 GROQ_MODEL = "llama-3.3-70b-versatile"  # Pastikan model ini benar

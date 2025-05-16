@@ -1,5 +1,5 @@
 import streamlit as st
-from retrieval.search import process_query
+from retrieval.search import search_and_respond
 from config import GROQ_API_KEY, GROQ_MODEL
 
 # Inisialisasi state
@@ -330,7 +330,7 @@ if prompt := st.chat_input("Masukkan pertanyaan Anda..."):
 
     with st.spinner("🔍 Mencari jawaban..."):
         try:
-            answer = process_query(prompt)
+            answer = search_and_respond(prompt)
 
             if answer.startswith("❌"):
                 error_msg = answer.replace("❌", "").strip()

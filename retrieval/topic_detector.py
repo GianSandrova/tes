@@ -25,3 +25,6 @@ Pertanyaan baru:
         return "berbeda" in response
     except:
         return False  # fallback aman
+
+def get_last_question(history):
+    return history[-1][0] if history else ""
