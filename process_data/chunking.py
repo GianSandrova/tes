@@ -84,14 +84,38 @@ def process_hadith_chunks(hadith_item, session):
         "label": hadith_number_str
     })
 
-    # Node: Chunk Text (Arabic)
+    # === 1. Chunk Info ===
+    info_text = f"[INFO Bukhari:{hadith_number}] Hadis Shahih Bukhari nomor {hadith_number}"
+    info_embedding = embed_chunk(info_text)
+    info_id = str(uuid4())
+
+    session.run("""
+        MATCH (n:HadithNumber {number: $number})
+        CREATE (c_info:Chunk {
+            id: $id,
+            text: $text,
+            embedding: $embedding,
+            source: 'info',
+            hadith_number: $number,
+            label: $label
+        })
+        CREATE (n)-[:HAS_CHUNK]->(c_info)
+    """, {
+        "id": info_id,
+        "text": info_text,
+        "embedding": info_embedding,
+        "number": hadith_number,
+        "label": hadith_number_str
+    })
+
+    # === 2. Chunk Text (Arabic)
     for chunk in chunk_text(arabic_text):
         chunk_arab = f"[text Shahih Bukhari:{hadith_number}] {chunk}"
         embedding_arab = embed_chunk(chunk_arab)
         arab_id = str(uuid4())
 
         session.run("""
-            MATCH (n:HadithNumber {number: $number})
+            MATCH (c_info:Chunk {id: $parent_id})
             CREATE (c_arab:Chunk {
                 id: $id,
                 text: $text,
@@ -100,16 +124,17 @@ def process_hadith_chunks(hadith_item, session):
                 hadith_number: $number,
                 label: $label
             })
-            CREATE (n)-[:HAS_CHUNK]->(c_arab)
+            CREATE (c_info)-[:HAS_CHUNK]->(c_arab)
         """, {
             "id": arab_id,
+            "parent_id": info_id,
             "text": chunk_arab,
             "embedding": embedding_arab,
             "number": hadith_number,
             "label": hadith_number_str
         })
 
-        # Node: Chunk Translation
+        # === 3. Chunk Translation
         if translation_text:
             for t_chunk in chunk_text(translation_text):
                 chunk_trans = f"[translation Shahih Bukhari:{hadith_number}] {t_chunk}"

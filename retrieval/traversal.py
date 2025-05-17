@@ -23,6 +23,8 @@ def traverse_from_info(info_id):
         RETURN 
             info.surah_name AS surah,
             info.ayat_number AS ayat_number,
+            info.hadith_number AS hadith_number,
+            info.label AS label,
             info.text AS info_text,
             text.text AS text_text,
             translation.text AS translation_text,

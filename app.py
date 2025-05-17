@@ -1,6 +1,14 @@
 import streamlit as st
+from html import escape
+import re
 from retrieval.search import search_and_respond
 from config import GROQ_API_KEY, GROQ_MODEL
+
+# Fungsi tambahan untuk konversi Markdown ke HTML
+def markdown_to_html(text):
+    text = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', text)
+    text = re.sub(r'\*(.*?)\*', r'<i>\1</i>', text)
+    return text
 
 # Inisialisasi state
 if "messages" not in st.session_state:
@@ -252,9 +260,9 @@ st.markdown("""
     /* Input field interaction states */
     .stChatInput input:focus, 
     [data-testid="stChatInputTextArea"]:focus {
-        border-color: #4d90fe !important;
-        box-shadow: 0 0 0 2px rgba(77, 144, 254, 0.3) !important;
-        outline: none !important;
+        border-color: #000000 !important;
+        box-shadow: none !important;  
+        outline: none !important; 
     }
     
     /* Make sure the scrollbars match theme */
@@ -286,6 +294,10 @@ st.markdown("""
     [data-baseweb="notification"], [role="alert"] {
         background-color: #232323 !important;
         color: #f0f0f0 !important;
+    }
+    /* Cursor caret putih */
+    input, textarea {
+    caret-color: white !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -339,8 +351,10 @@ if prompt := st.chat_input("Masukkan pertanyaan Anda..."):
                 st.session_state.messages.append({"role": "assistant", "content": answer, "avatar": "❌"})
                 st.stop()
 
-            processed_answer = answer.replace('\n', '<br>')
-            formatted_answer = f'<div class="assistant-message">{processed_answer}</div>'
+            # ⬇️ Konversi ke HTML dengan bold/italic support
+            escaped_answer = escape(answer)
+            html_answer = markdown_to_html(escaped_answer).replace('\n', '<br>')
+            formatted_answer = f'<div class="assistant-message">{html_answer}</div>'
 
             with st.chat_message("assistant", avatar="💡"):
                 st.markdown(formatted_answer, unsafe_allow_html=True)

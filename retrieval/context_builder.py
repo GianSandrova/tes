@@ -13,6 +13,7 @@ def build_chunk_context_interleaved(query_text, top_k=4, min_score=0.6):
             print(f"❌ Gagal mengambil element_id: {e}")
             continue
 
+        # Temukan node info terdekat
         info_id = find_info_chunk_id(chunk_id)
         if not info_id:
             print(f"⚠️ Tidak ditemukan info chunk untuk chunk ID={chunk_id}")
@@ -22,21 +23,32 @@ def build_chunk_context_interleaved(query_text, top_k=4, min_score=0.6):
             continue
         visited_info_ids.add(info_id)
 
+        # Ambil struktur penuh dari node info
         row = traverse_from_info(info_id)
         if not row:
             continue
 
+        # Tentukan sumber otomatis (Qur’an atau Hadis)
+        if row.get("surah"):
+            sumber = f"📖 Surah: {row.get('surah')}\nAyat: {row.get('ayat_number')}"
+        elif row.get("hadith_number"):
+            sumber = f"📘 Hadis Bukhari No. {row.get('hadith_number')} ({row.get('label')})"
+        else:
+            sumber = "❓ Sumber tidak diketahui"
+
+        # Debug (opsional)
         print(f"🔍 [HYBRID] Traversal dari chunk ID={chunk_id} → info ID={info_id}")
         print(f"    🔢 Skor similarity: {similarity:.4f}")
-        print(f"    📖 Surah: {row.get('surah')} | Ayat: {row.get('ayat_number')}")
+        print(f"    📚 Sumber: {sumber}")
         print(f"    🧩 Info       : {(row.get('info_text') or '-')[:60]}...")
         print(f"    🧩 Teks       : {(row.get('text_text') or '-')[:60]}...")
         print(f"    🧩 Terjemahan : {(row.get('translation_text') or '-')[:60]}...")
         print(f"    🧩 Tafsir     : {(row.get('tafsir_text') or '-')[:60]}...\n")
 
+        # Bentuk blok konteks
         context += f"""
-📖 Surah: {row.get('surah')}
-Ayat {row.get('ayat_number')} | Skor Similarity: {similarity:.4f}
+{sumber}
+Skor Similarity: {similarity:.4f}
 
 ➤ Info:
 {row.get('info_text') or '-'}
@@ -50,6 +62,7 @@ Ayat {row.get('ayat_number')} | Skor Similarity: {similarity:.4f}
 ➤ Tafsir:
 {row.get('tafsir_text') or '-'}
 """
+
         if len(visited_info_ids) >= top_k:
             break
 
