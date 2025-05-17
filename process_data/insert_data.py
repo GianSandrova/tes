@@ -58,8 +58,8 @@ def insert_quran_chunks():
 
         with driver.session() as session:
             # Reset all existing data
-            # session.run("MATCH (n) DETACH DELETE n")
-            # session.run("CREATE (:Quran {name: 'Al-Quran'})")
+            session.run("MATCH (n) DETACH DELETE n")
+            session.run("CREATE (:Quran {name: 'Al-Quran'})")
 
             total_ayat = sum(len(surah["text"]) for surah in quran_data)
             progress = tqdm(total=total_ayat, desc="Memproses Ayat")
