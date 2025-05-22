@@ -14,5 +14,5 @@ EMBEDDING_PROPERTY = "embedding"  # Properti yang menyimpan embedding
 driver = GraphDatabase.driver(URI, auth=AUTH)
 
 DIMENSION_STRUCTURAL = 128
-GROQ_API_KEY = "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"
+GROQ_API_KEY = "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"
 GROQ_MODEL = "llama-3.3-70b-versatile"  # Pastikan model ini benar
