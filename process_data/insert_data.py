@@ -58,7 +58,7 @@ def insert_quran_chunks():
 
         with driver.session() as session:
             # Reset all existing data
-            session.run("MATCH (n) DETACH DELETE n")
+            # session.run("MATCH (n) DETACH DELETE n")
             session.run("CREATE (:Quran {name: 'Al-Quran'})")
 
             total_ayat = sum(len(surah["text"]) for surah in quran_data)
@@ -82,5 +82,5 @@ def insert_quran_chunks():
 
 if __name__ == "__main__":
     insert_quran_chunks()
-    insert_hadith_chunks()
+    # insert_hadith_chunks()
     print("Semua data berhasil dimasukkan ke dalam Neo4j.")

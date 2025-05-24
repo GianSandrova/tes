@@ -73,7 +73,9 @@ st.markdown("""
     
     /* Input area styling - enhanced for better visibility */
     .stChatInput, [data-testid="stChatInput"],
-    .stChatInput input, [data-testid="stChatInputTextArea"],
+    .stChatInput input, [data-testid="stChatInputTextArea"] {
+    padding-right: 50px !important;  /* Agar teks tidak tertimpa tombol */
+    },
     .st-emotion-cache-10oheav, .st-emotion-cache-yfdjkx,
     .st-emotion-cache-w1wxsf, .st-emotion-cache-1q3a02i,
     .element-container .stTextInput input,
@@ -109,7 +111,7 @@ st.markdown("""
     /* Chat container */
     .stChatContainer, [data-testid="stChatContainer"], 
     .st-emotion-cache-1v04vpj, .st-emotion-cache-1n9bvj {
-        background-color: #121212 !important;
+        background-color: #ffffff !important;
     }
     
     /* Message styling */
@@ -129,6 +131,9 @@ st.markdown("""
         border-radius: 0.5rem !important;
         margin: 0.8rem 0 !important;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+        overflow-wrap: break-word !important;  /* ✅ Bungkus kata panjang */
+        word-break: break-word !important;     /* ✅ Paksa putus kata jika perlu */
+        white-space: pre-wrap !important;      /* ✅ Hormati newline + wrap baris */
     }
     
     .error-message {
@@ -260,7 +265,7 @@ st.markdown("""
     /* Input field interaction states */
     .stChatInput input:focus, 
     [data-testid="stChatInputTextArea"]:focus {
-        border-color: #000000 !important;
+        border-color: #1e1e1e !important;
         box-shadow: none !important;  
         outline: none !important; 
     }
