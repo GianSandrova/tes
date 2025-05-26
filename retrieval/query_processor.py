@@ -44,7 +44,7 @@ def process_user_query(teks_pertanyaan):
     if not results:
         return "❌ Maaf, saya tidak menemukan potongan yang relevan untuk menjawab pertanyaan ini."
 
-    context = build_chunk_context_interleaved(combined_query, top_k=4, min_score=0.6)
+    context = build_chunk_context_interleaved(combined_query, top_k=20, min_score=0.6)
     answer = generate_answer(teks_pertanyaan, context, history=st.session_state.history)
 
     # Kirim jawaban ke pengguna

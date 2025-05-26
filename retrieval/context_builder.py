@@ -1,7 +1,7 @@
 from retrieval.retrieval import vector_search_chunks_generator
 from retrieval.traversal import find_info_chunk_id, traverse_from_info
 
-def build_chunk_context_interleaved(query_text, top_k=4, min_score=0.6):
+def build_chunk_context_interleaved(query_text, top_k=20, min_score=0.6):
     context = ""
     visited_info_ids = set()
 
