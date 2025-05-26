@@ -23,7 +23,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# Override complete streamlit theme with custom dark theme
+
 st.markdown("""
 <style>
     /* Reset all backgrounds to dark */
@@ -71,47 +71,99 @@ st.markdown("""
         background-color: #1a1a1a !important;
     }
     
-    /* Input area styling - enhanced for better visibility */
-    .stChatInput, [data-testid="stChatInput"],
-    .stChatInput input, [data-testid="stChatInputTextArea"] {
-    padding-right: 50px !important;  /* Agar teks tidak tertimpa tombol */
-    },
-    .st-emotion-cache-10oheav, .st-emotion-cache-yfdjkx,
-    .st-emotion-cache-w1wxsf, .st-emotion-cache-1q3a02i,
-    .element-container .stTextInput input,
-    [data-baseweb="input"] input, [data-baseweb="textarea"] textarea,
-    .stTextArea textarea {
-        background-color: #1e1e1e !important;
+    /* 🔧 PERBAIKAN INPUT CHAT - Menghilangkan double border */
+    /* Container utama untuk input chat */
+    .stChatFloatingInputContainer,
+    [data-testid="stChatFloatingInputContainer"],
+    .st-emotion-cache-1r4qj4y,
+    .st-emotion-cache-1kg1ch6,
+    .st-emotion-cache-8qqqw5 {
+        background-color: #121212 !important;
+        border-top: 1px solid #333333 !important;
+        padding: 10px !important;
+    }
+    
+    /* Input container wrapper - HILANGKAN BORDER GANDA */
+    .stChatInputContainer,
+    [data-testid="stChatInputContainer"],
+    .stChatInput,
+    [data-testid="stChatInput"] {
+        background-color: transparent !important;
+        max-width: 900px !important;
+        margin: 0 auto !important;
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+    }
+    
+    /* Div pembungkus input - HILANGKAN SEMUA BORDER */
+    .stChatInput > div,
+    [data-testid="stChatInput"] > div,
+    .stChatInput > div > div,
+    [data-testid="stChatInput"] > div > div,
+    .stChatInput div[data-baseweb="base-input"],
+    [data-testid="stChatInput"] div[data-baseweb="base-input"] {
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+    }
+    
+    /* Input field itu sendiri - SINGLE BORDER SAJA */
+    .stChatInput input,
+    [data-testid="stChatInputTextArea"],
+    .stChatInput textarea,
+    input[data-testid="stChatInputTextArea"],
+    .st-emotion-cache-10oheav input,
+    .st-emotion-cache-yfdjkx input,
+    .st-emotion-cache-w1wxsf input,
+    .st-emotion-cache-1q3a02i input,
+    [data-baseweb="input"] input,
+    [data-baseweb="textarea"] textarea {
+        background-color: #2a2a2a !important;
         color: #ffffff !important;
         border: 1px solid #444444 !important;
         border-radius: 25px !important;
-        padding: 12px 15px !important;
+        padding: 12px 50px 12px 15px !important;
         font-size: 15px !important;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
+        box-shadow: none !important;
+        outline: none !important;
+        caret-color: white !important;
     }
     
-    /* Bottom container including input area */
-    footer, .st-emotion-cache-17lntkn, .st-emotion-cache-7ym5gk,
-    [data-testid="stFooter"], .stChatFloatingInputContainer,
-    .streamlit-chat .stChatFloatingInputContainer,
-    .st-emotion-cache-1r4qj4y, .st-emotion-cache-1kg1ch6 {
+    /* Input placeholder */
+    .stChatInput input::placeholder,
+    [data-testid="stChatInputTextArea"]::placeholder,
+    input::placeholder,
+    textarea::placeholder {
+        color: #aaaaaa !important;
+        opacity: 0.7 !important;
+    }
+    
+    /* Input focus state */
+    .stChatInput input:focus,
+    [data-testid="stChatInputTextArea"]:focus,
+    input:focus,
+    textarea:focus {
+        border-color: #5a5a5a !important;
+        box-shadow: 0 0 0 1px #5a5a5a !important;
+        outline: none !important;
+        background-color: #2a2a2a !important;
+    }
+    
+    /* Bottom footer area */
+    footer, 
+    .st-emotion-cache-17lntkn, 
+    .st-emotion-cache-7ym5gk,
+    [data-testid="stFooter"] {
         background-color: #121212 !important;
         border-color: #3a3a3a !important;
-        padding: 10px 5px !important;
-    }
-    
-    /* Input container adjustments */
-    .stChatInputContainer, [data-testid="stChatInputContainer"] {
-        background-color: transparent !important;
-        padding: 5px !important;
-        max-width: 900px !important;
-        margin: 0 auto !important;
     }
     
     /* Chat container */
     .stChatContainer, [data-testid="stChatContainer"], 
     .st-emotion-cache-1v04vpj, .st-emotion-cache-1n9bvj {
-        background-color: #ffffff !important;
+        background-color: #121212 !important;
     }
     
     /* Message styling */
@@ -131,9 +183,9 @@ st.markdown("""
         border-radius: 0.5rem !important;
         margin: 0.8rem 0 !important;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
-        overflow-wrap: break-word !important;  /* ✅ Bungkus kata panjang */
-        word-break: break-word !important;     /* ✅ Paksa putus kata jika perlu */
-        white-space: pre-wrap !important;      /* ✅ Hormati newline + wrap baris */
+        overflow-wrap: break-word !important;
+        word-break: break-word !important;
+        white-space: pre-wrap !important;
     }
     
     .error-message {
@@ -176,22 +228,11 @@ st.markdown("""
         color: #f0f0f0 !important;
     }
     
-    /* Input field text */
-    input, textarea, [contentEditable=true] {
-        color: #ffffff !important;
-        background-color: #2a2a2a !important;
-    }
-    
-    /* Input field placeholder */
-    ::placeholder {
-        color: #aaaaaa !important;
-        opacity: 0.8 !important;
-    }
-    
     /* Send button in chat - enhanced styling */
     button[kind="primaryFormSubmit"],
-    .st-emotion-cache-13e17gk, .st-emotion-cache-7ym5gk,
-    button[data-testid="stChatMessageSubmitButton"] {
+    .st-emotion-cache-13e17gk,
+    button[data-testid="stChatMessageSubmitButton"],
+    button[aria-label="Send message"] {
         background-color: #1c3a5e !important;
         color: white !important;
         border-radius: 50% !important;
@@ -202,6 +243,7 @@ st.markdown("""
         justify-content: center !important;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
         margin-left: 8px !important;
+        border: none !important;
     }
     
     /* Status widget */
@@ -223,11 +265,6 @@ st.markdown("""
         color: #f0f0f0 !important;
     }
     
-    /* Bottom input container */
-    .stChatInputContainer {
-        background-color: #121212 !important;
-    }
-    
     /* Streamlit main page top margin fix */
     .main > div:first-of-type {
         padding-top: 1rem !important;
@@ -236,38 +273,6 @@ st.markdown("""
     /* Streamlit top header removal */
     header[data-testid="stHeader"] {
         display: none !important;
-    }
-    
-    /* Clean input container with proper styling */
-    .stChatFloatingInputContainer, .st-emotion-cache-8qqqw5,
-    .streamlit-chat .stChatFloatingInputContainer,
-    [data-testid="stChatFloatingInputContainer"] {
-        background-color: #121212 !important;
-        border-top: 1px solid #333333 !important;
-        padding: 15px !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-    }
-    
-    /* Input area wrapper */
-    .stChatInput > div, [data-testid="stChatInput"] > div {
-        background-color: transparent !important;
-    }
-    
-    /* Input placeholder */
-    .stChatInput input::placeholder, 
-    [data-testid="stChatInputTextArea"]::placeholder {
-        color: #aaaaaa !important;
-        opacity: 0.7 !important;
-    }
-    
-    /* Input field interaction states */
-    .stChatInput input:focus, 
-    [data-testid="stChatInputTextArea"]:focus {
-        border-color: #1e1e1e !important;
-        box-shadow: none !important;  
-        outline: none !important; 
     }
     
     /* Make sure the scrollbars match theme */
@@ -291,7 +296,7 @@ st.markdown("""
     
     /* Bottom button area */
     .st-emotion-cache-16txtl3, .st-emotion-cache-r421ms {
-        background-color: #1a1a1a !important;
+        background-color: #121212 !important;
     }
     
     /* Any white boxes that might pop up */
@@ -299,10 +304,6 @@ st.markdown("""
     [data-baseweb="notification"], [role="alert"] {
         background-color: #232323 !important;
         color: #f0f0f0 !important;
-    }
-    /* Cursor caret putih */
-    input, textarea {
-    caret-color: white !important;
     }
 </style>
 """, unsafe_allow_html=True)
