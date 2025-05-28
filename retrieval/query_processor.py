@@ -81,7 +81,7 @@ Skor Similarity: 1.00 (Exact Match)
         # 2. Gunakan combined_query dan NAIKKAN min_score
         #    Ini adalah kunci untuk memfilter hasil yang tidak relevan pada pertanyaan lanjutan.
         #    Nilai 0.88 adalah titik awal yang baik, Anda bisa menyesuaikannya.
-        context = build_chunk_context_interleaved(combined_query, top_k=6, min_score=0.6)
+        context = build_chunk_context_interleaved(combined_query, top_k=5, min_score=0.6)
 
     # === SELESAI ===
 
