@@ -81,6 +81,6 @@ def insert_quran_chunks():
         driver.close()
 
 if __name__ == "__main__":
-    insert_quran_chunks()
-    # insert_hadith_chunks()
+    # insert_quran_chunks()
+    insert_hadith_chunks()
     print("Semua data berhasil dimasukkan ke dalam Neo4j.")

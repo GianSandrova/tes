@@ -85,7 +85,10 @@ def process_hadith_chunks(hadith_item, session):
     })
 
     # === 1. Chunk Info ===
-    info_text = f"[INFO Bukhari:{hadith_number}] Hadis Shahih Bukhari nomor {hadith_number}"
+    info_text = (
+        f"[INFO Bukhari:{hadith_number}] Hadis Shahih Bukhari nomor {hadith_number}. "
+        f"Hadis ini tercatat sebagai hadis nomor-{hadith_number} dalam kitab Shahih Bukhari."
+    )
     info_embedding = embed_chunk(info_text)
     info_id = str(uuid4())
 
@@ -110,7 +113,9 @@ def process_hadith_chunks(hadith_item, session):
 
     # === 2. Chunk Text (Arabic)
     for chunk in chunk_text(arabic_text):
-        chunk_arab = f"[text Shahih Bukhari Nomor:{hadith_number}] {chunk}"
+        chunk_arab = (
+            f"[text Shahih Bukhari Nomor:{hadith_number}] Ini adalah isi hadis nomor {hadith_number} dalam bahasa Arab: {chunk}"
+        )
         embedding_arab = embed_chunk(chunk_arab)
         arab_id = str(uuid4())
 
@@ -137,7 +142,9 @@ def process_hadith_chunks(hadith_item, session):
         # === 3. Chunk Translation
         if translation_text:
             for t_chunk in chunk_text(translation_text):
-                chunk_trans = f"[translation Shahih Bukhari Nomor:{hadith_number}] {t_chunk}"
+                chunk_trans = (
+                    f"[translation Shahih Bukhari Nomor:{hadith_number}] Berikut terjemahan hadis nomor {hadith_number}: {t_chunk}"
+                )
                 embedding_trans = embed_chunk(chunk_trans)
                 trans_id = str(uuid4())
 
@@ -160,7 +167,6 @@ def process_hadith_chunks(hadith_item, session):
                     "number": hadith_number,
                     "label": hadith_number_str
                 })
-
 
 
 def process_surah_chunks(surah, session):
