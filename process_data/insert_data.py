@@ -10,39 +10,56 @@ project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, project_root)
 
 from process_data.data_loader import load_quran_data, load_hadith_data
-from process_data.chunking import process_surah_chunks, process_hadith_chunks
+from process_data.chunking import process_surah_chunks, process_hadith_source
 from config import driver
 from tqdm import tqdm
 
-def insert_hadith_chunks():
+def insert_all_hadith_sources():
     """
-    Load Hadith JSON data and insert all nodes and relationships into Neo4j.
+    Memuat semua sumber data Hadis yang terdefinisi dan membangun graf
+    hirarkis di Neo4j untuk masing-masing sumber.
     """
-    hadith_json_path = os.path.join(project_root, 'hadis.json')
-    
+    # =================================================================
+    # PUSAT KENDALI: Daftarkan semua sumber hadis Anda di sini
+    # =================================================================
+    hadith_sources_to_process = {
+        # Nama Sumber     : Path ke file JSON
+        "Shahih Bukhari": os.path.join(project_root,  'hadis_bukhari.json'),
+        "Jami` at-Tirmidzi": os.path.join(project_root, 'hadis_tirmidzi.json'),
+    }
+
     try:
-        hadith_data = load_hadith_data(hadith_json_path)
-
         with driver.session() as session:
-            session.run("CREATE (:Hadith {name: 'Shahih Bukhari'})")
+            for source_name, json_path in hadith_sources_to_process.items():
+                print(f"\n{'='*60}")
+                print(f"Memulai proses untuk: {source_name}")
+                print(f"{'='*60}")
 
-            progress = tqdm(total=len(hadith_data), desc="Memproses Hadis")
+                try:
+                    # Memuat data dari file JSON yang sesuai
+                    hadith_data = load_hadith_data(json_path)
+                    
+                    if hadith_data:
+                        # Membuat progress bar untuk iterasi kitab
+                        progress = tqdm(total=len(hadith_data), desc=f"Memproses Kitab dari {source_name}")
+                        
+                        # Panggil fungsi utama yang generik
+                        process_hadith_source(hadith_data, source_name, session)
+                        
+                        progress.update(len(hadith_data))
+                        progress.close()
+                    else:
+                        print(f"⚠️ Data untuk {source_name} kosong atau tidak dapat dimuat dari {json_path}.")
+                
+                except FileNotFoundError:
+                    print(f"❌ Peringatan: File untuk {source_name} tidak ditemukan di {json_path}. Melanjutkan ke sumber berikutnya.")
+                    continue
+        
+        print("\n\n✅ Semua sumber hadis yang tersedia berhasil diproses.")
 
-            for item in hadith_data:
-                process_hadith_chunks(item, session)
-                progress.update(1)
-
-            progress.close()
-            print("\n✅ Semua data Hadis dan chunk embedding berhasil dimasukkan ke Neo4j.")
-
-    except FileNotFoundError:
-        print(f"❌ File hadis.json tidak ditemukan di {hadith_json_path}")
-        sys.exit(1)
     except Exception as e:
-        print(f"❌ Error saat insert Hadis: {str(e)}")
+        print(f"❌ Terjadi error fatal saat proses insert: {str(e)}")
         sys.exit(1)
-    finally:
-        driver.close()
 
 def insert_quran_chunks():
     """
@@ -58,7 +75,7 @@ def insert_quran_chunks():
 
         with driver.session() as session:
             # Reset all existing data
-            # session.run("MATCH (n) DETACH DELETE n")
+            session.run("MATCH (n) DETACH DELETE n")
             session.run("CREATE (:Quran {name: 'Al-Quran'})")
 
             total_ayat = sum(len(surah["text"]) for surah in quran_data)
@@ -82,5 +99,5 @@ def insert_quran_chunks():
 
 if __name__ == "__main__":
     # insert_quran_chunks()
-    insert_hadith_chunks()
+    insert_all_hadith_sources()
     print("Semua data berhasil dimasukkan ke dalam Neo4j.")
