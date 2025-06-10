@@ -44,9 +44,10 @@
   },
   {
     "category": "Bahasa Kolokial",
-   "query": "kalo mau keluar WC baca apaan sih?",
+    "query": "bagaimana cara wudhu Rasulullah yang benar",
     "expected_ids": [
-        "📘 Hadis Jami` at-Tirmidzi No. 7 Kitab: Bersuci | Bab: Doa keluar wc"
+      "📘 Hadis Shahih Bukhari No. 159 Kitab: Wudlu | Bab: Wudlu' tiga kali-tiga kali",
+      "📘 Hadis Shahih Bukhari No. 164 Kitab: Wudlu | Bab: Berkumur-kumur dalam berwudlu"
     ]
   },
   {
@@ -130,7 +131,7 @@
   },
   {
     "category": "Pertanyaan Lain (Negasi)",
-  "query": "hadis mana yang menyatakan bahwa tidak ada wasiat bagi ahli waris?",
+"query": "hadis mana yang menyatakan bahwa tidak ada wasiat bagi ahli waris?",
     "expected_ids": [
       "📘 Hadis Jami` at-Tirmidzi No. 2046 Kitab: Wasiat | Bab: Tidak ada wasiat untuk ahli waris",
       "📘 Hadis Shahih Bukhari No. 2535 Kitab: Washiyat | Bab: Wasiat dan sabda Nabi Shallallahu 'alaihi wa Sallam"
@@ -145,7 +146,7 @@
   },
   {
     "category": "Pertanyaan General",
-    "query": "hukum cambuk bagi pezina yang belum menikah",
+    "query": "hukum cambuk bagi pezinah",
     "expected_ids": [
       "📖 Surah: An-Nur | Ayat: 2",
       "📖 Surah: An-Nur | Ayat: 3",
@@ -153,12 +154,12 @@
     ]
   },
   {
-    "category": "Dengan Cerita/Konteks",
-      "query": "Al-Quran mengatur hukuman fisik bagi pelaku zina, yaitu dicambuk. Di surah dan ayat berapa aturan hukuman cambuk ini disebutkan?",
+   "query": "Al-Quran mengatur hukuman fisik bagi pelaku zina, yaitu dicambuk. Di surah dan ayat berapa aturan hukuman cambuk ini disebutkan?",
     "expected_ids": [
-      "📘 Hadis Shahih Bukhari No. 2455 Kitab: Kesaksian | Bab: Persaksian orang yang menuduh, pencuri dan pezina",
       "📖 Surah: An-Nur | Ayat: 2",
-      "📘 Hadis Shahih Bukhari No. 6329 Kitab: Hukum hudud | Bab: Pezina yang belum menikah dicambuk dan diasingkan"
+      "📘 Hadis Shahih Bukhari No. 6329 Kitab: Hukum hudud | Bab: Pezina yang belum menikah dicambuk dan diasingkan",
+      "📘 Hadis Shahih Bukhari No. 2455 Kitab: Kesaksian | Bab: Persaksian orang yang menuduh, pencuri dan pezina",
+      "📘 Hadis Shahih Bukhari No. 6319 Kitab: Hukum hudud | Bab: Pezina hukumannya batu (rajam)"
     ]
   },
   {
