@@ -32,7 +32,7 @@ def get_source_from_context_string(context_part: str) -> str | None:
 
 def run_retrieval_for_query(query: str, history: list = []) -> list[str]:
     """
-    Menjalankan alur retrieval sistem Anda dan MEMASTIKAN SEMUA HASIL DOKUMEN DIBACA.
+    Menjalankan alur retrieval dan MEMASTIKAN SEMUA HASIL DOKUMEN DIPROSES MENJADI DAFTAR.
     """
     print(f"\n---> Menjalankan retrieval untuk query: '{query}'")
     
@@ -60,18 +60,20 @@ def run_retrieval_for_query(query: str, history: list = []) -> list[str]:
     if not context_str:
         return []
 
-    # === BAGIAN PENTING YANG DIPERBAIKI ===
-    # Pisahkan konteks menjadi beberapa bagian per dokumen (dipisahkan oleh '---')
+    # === INI BAGIAN PALING KRUSIAL ===
+    # Ia mengambil string panjang dari build_chunk_context_interleaved
+    # lalu memecahnya menjadi beberapa bagian berdasarkan '---'
     context_parts = context_str.strip().split('---')
     
     retrieved_ids = []
-    # Loop melalui setiap bagian untuk mendapatkan semua sumber
+    # Loop ini akan berjalan untuk SETIAP bagian, tidak hanya yang pertama
     for part in context_parts:
         if part.strip():
             source_id = get_source_from_context_string(part)
             if source_id:
                 retrieved_ids.append(source_id)
-                
+    
+    # Hasilnya adalah daftar yang berisi BANYAK item, bukan satu
     return retrieved_ids
 
 # ==============================================================================
