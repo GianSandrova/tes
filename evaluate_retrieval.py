@@ -7,7 +7,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
 # ==============================================================================
-# == BAGIAN 1: IMPORT DARI SISTEM RETRIEVAL ANDA                            ==
+# == BAGIAN 1: IMPORT DARI SISTEM RETRIEVAL ANDA                              ==
 # ==============================================================================
 try:
     from retrieval.parser import parse_hadith_query
@@ -23,14 +23,26 @@ except ImportError as e:
 # == BAGIAN 2: FUNGSI HELPER DAN FUNGSI RETRIEVAL UTAMA                       ==
 # ==============================================================================
 
+# =============================================================================
+# == FUNGSI INI DIGANTI DENGAN VERSI V2 YANG LEBIH STABIL ==
+# =============================================================================
 def get_source_from_context_string(context_part: str) -> str | None:
-    """Mengekstrak ID Sumber dari satu blok konteks."""
-    match = re.search(r"^(📖.*?|📘.*?)(?=\nSkor Similarity:)", context_part, re.DOTALL)
-    if match:
-        return ' '.join(match.group(1).strip().split())
+    """Membaca teks baris demi baris untuk menemukan header sumber (Versi 2)."""
+    header_lines = []
+    # Membaca setiap baris dari potongan konteks
+    for line in context_part.strip().split('\n'):
+        # Jika bertemu baris "Skor Similarity", hentikan pembacaan header
+        if "Skor Similarity:" in line:
+            break
+        # Jika baris tidak kosong, tambahkan ke header
+        if line.strip():
+            header_lines.append(line.strip())
+    
+    # Jika header ditemukan, gabungkan menjadi satu string
+    if header_lines:
+        return ' '.join(header_lines)
     return None
-
-# Di dalam file evaluate_retrieval.py
+# =============================================================================
 
 def run_retrieval_for_query(query: str, history: list = []) -> list[str]:
     """
@@ -69,6 +81,7 @@ def run_retrieval_for_query(query: str, history: list = []) -> list[str]:
     # Loop ini akan memproses SEMUA bagian di dalam context_parts
     for part in context_parts:
         if part.strip():
+            # Memanggil fungsi get_source_from_context_string (versi V2 yang baru)
             source_id = get_source_from_context_string(part)
             if source_id:
                 retrieved_ids.append(source_id)
