@@ -1,6 +1,6 @@
 import re
 
-# String mentah ini saya ambil LANGSUNG dari log debug Anda untuk query 'liwath'
+# String mentah ini SAMA seperti sebelumnya
 long_context_string = """
 📖 Surah: An-Nur | Ayat: 2
 Skor Similarity: 0.7847
@@ -69,31 +69,44 @@ Skor Similarity: 0.7806
 ---
 """
 
-def get_source_from_context_string(context_part: str) -> str | None:
-    match = re.search(r"^(📖.*?|📘.*?)(?=\nSkor Similarity:)", context_part, re.DOTALL)
-    if match:
-        return ' '.join(match.group(1).strip().split())
+# =========================================================
+# == FUNGSI PARSING BARU (v2) - TANPA REGEX ==
+# =========================================================
+def get_source_from_context_string_v2(context_part: str) -> str | None:
+    """Membaca teks baris demi baris untuk menemukan header sumber."""
+    header_lines = []
+    # Membaca setiap baris dari potongan konteks
+    for line in context_part.strip().split('\n'):
+        # Jika bertemu baris "Skor Similarity", hentikan pembacaan header
+        if "Skor Similarity:" in line:
+            break
+        # Jika baris tidak kosong, tambahkan ke header
+        if line.strip():
+            header_lines.append(line.strip())
+    
+    # Jika header ditemukan, gabungkan menjadi satu string
+    if header_lines:
+        return ' '.join(header_lines)
     return None
+# =========================================================
 
 def parse_the_string(context_str):
     context_parts = context_str.strip().split('---')
     
     retrieved_ids = []
-    # Loop akan berjalan untuk semua bagian
     for part in context_parts:
         if part.strip():
-            source_id = get_source_from_context_string(part)
+            # Menggunakan fungsi parsing v2 yang baru
+            source_id = get_source_from_context_string_v2(part)
             if source_id:
                 retrieved_ids.append(source_id)
     
-    # Return ada DI LUAR LOOP, setelah semua selesai
     return retrieved_ids
 
 # Jalankan tes dan cetak hasilnya
 final_list = parse_the_string(long_context_string)
 
-print("\n\n===== HASIL AKHIR TES PARSING =====")
-print(f"Tipe data hasil akhir: {type(final_list)}")
+print("\n\n===== HASIL AKHIR TES PARSING (v2) =====")
 print(f"Jumlah item dalam daftar: {len(final_list)}")
 print("Isi daftar:")
 print(final_list)
