@@ -48,7 +48,7 @@ Skor Similarity: 0.7828
 ➤ Info:
 [INFO Al-Mu'minun:7] Surah Al-Mu'minun Ayat 7
 ➤ Teks Arab:
-[text Al-Mu'minun:7] فَمَنِ ابْتَغٰى وَرَاۤءَ ذٰلِكَ فَاُولٰۤىِٕكَ هُمُ الْعٰدُوْنَ ۚ
+[text Al-Mu'minun:7] فَمَنِ ابْتَغٰى وَرَاۤءَ ذٰلِكَ فَاُولٰۤىِٕكَ هُمُ الْعٰدُوْnَ ۚ
 ➤ Terjemahan:
 [translation Al-Mu'minun:7] Tetapi barang siapa mencari di balik itu (zina, dan sebagainya)...
 ➤ Tafsir:
@@ -69,28 +69,24 @@ Skor Similarity: 0.7806
 ---
 """
 
-# Ini adalah fungsi parsing yang sama persis dari skrip evaluasi
 def get_source_from_context_string(context_part: str) -> str | None:
     match = re.search(r"^(📖.*?|📘.*?)(?=\nSkor Similarity:)", context_part, re.DOTALL)
     if match:
         return ' '.join(match.group(1).strip().split())
     return None
 
-# Ini adalah logika parsing yang sama persis dari skrip evaluasi
 def parse_the_string(context_str):
-    print("--- MEMULAI TES PARSING ---")
     context_parts = context_str.strip().split('---')
-    print(f"Jumlah bagian setelah di-split: {len(context_parts)}")
     
     retrieved_ids = []
-    for i, part in enumerate(context_parts):
-        print(f"Memproses bagian ke-{i+1}...")
+    # Loop akan berjalan untuk semua bagian
+    for part in context_parts:
         if part.strip():
             source_id = get_source_from_context_string(part)
             if source_id:
                 retrieved_ids.append(source_id)
     
-    print("--- TES PARSING SELESAI ---")
+    # Return ada DI LUAR LOOP, setelah semua selesai
     return retrieved_ids
 
 # Jalankan tes dan cetak hasilnya
