@@ -61,32 +61,32 @@ def get_full_context_from_info(info_id: str):
 # =====================================================================
 # == FUNGSI BARU UNTUK MENGAMBIL HADIS TETANGGA ==
 # =====================================================================
-# def get_neighboring_hadiths_in_bab(bab_name: str, kitab_name: str, source_name: str, exclude_hadith_number: int, limit: int = 2):
-#     """
-#     NEW: Mencari hadis lain dalam Bab yang sama.
-#     - Mengambil hadis tetangga untuk memperkaya konteks.
-#     - Mengecualikan hadis yang sudah ditemukan oleh vector search.
-#     """
-#     neighbor_ids = driver.execute_query(
-#         """
-#         // 1. Temukan Bab yang tepat berdasarkan nama, kitab, dan sumber
-#         MATCH (b:Bab {name: $bab_name, kitab_name: $kitab_name, source_name: $source_name})
+def get_neighboring_hadiths_in_bab(bab_name: str, kitab_name: str, source_name: str, exclude_hadith_number: int, limit: int = 1):
+    """
+    NEW: Mencari hadis lain dalam Bab yang sama.
+    - Mengambil hadis tetangga untuk memperkaya konteks.
+    - Mengecualikan hadis yang sudah ditemukan oleh vector search.
+    """
+    neighbor_ids = driver.execute_query(
+        """
+        // 1. Temukan Bab yang tepat berdasarkan nama, kitab, dan sumber
+        MATCH (b:Bab {name: $bab_name, kitab_name: $kitab_name, source_name: $source_name})
         
-#         // 2. Temukan semua info chunk hadis di dalam bab tersebut
-#         MATCH (b)-[:CONTAINS_HADITH_CHUNK]->(info:Chunk {source:'info'})
+        // 2. Temukan semua info chunk hadis di dalam bab tersebut
+        MATCH (b)-[:CONTAINS_HADITH_CHUNK]->(info:Chunk {source:'info'})
         
-#         // 3. Kecualikan hadis yang nomornya sama dengan yang sudah kita temukan
-#         WHERE info.hadith_number <> $exclude_hadith_number
+        // 3. Kecualikan hadis yang nomornya sama dengan yang sudah kita temukan
+        WHERE info.hadith_number <> $exclude_hadith_number
         
-#         // 4. Kembalikan elementId dan batasi jumlahnya
-#         RETURN elementId(info) AS info_id
-#         LIMIT $limit
-#         """, {
-#             "bab_name": bab_name,
-#             "kitab_name": kitab_name,
-#             "source_name": source_name,
-#             "exclude_hadith_number": exclude_hadith_number,
-#             "limit": limit
-#         }
-#     )
-#     return [record["info_id"] for record in neighbor_ids.records]
+        // 4. Kembalikan elementId dan batasi jumlahnya
+        RETURN elementId(info) AS info_id
+        LIMIT $limit
+        """, {
+            "bab_name": bab_name,
+            "kitab_name": kitab_name,
+            "source_name": source_name,
+            "exclude_hadith_number": exclude_hadith_number,
+            "limit": limit
+        }
+    )
+    return [record["info_id"] for record in neighbor_ids.records]

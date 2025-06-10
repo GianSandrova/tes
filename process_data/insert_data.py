@@ -19,9 +19,6 @@ def insert_all_hadith_sources():
     Memuat semua sumber data Hadis yang terdefinisi dan membangun graf
     hirarkis di Neo4j untuk masing-masing sumber.
     """
-    # =================================================================
-    # PUSAT KENDALI: Daftarkan semua sumber hadis Anda di sini
-    # =================================================================
     hadith_sources_to_process = {
         # Nama Sumber     : Path ke file JSON
         "Shahih Bukhari": os.path.join(project_root,  'hadis_bukhari.json'),
@@ -98,6 +95,6 @@ def insert_quran_chunks():
         driver.close()
 
 if __name__ == "__main__":
-    # insert_quran_chunks()
+    insert_quran_chunks()
     insert_all_hadith_sources()
     print("Semua data berhasil dimasukkan ke dalam Neo4j.")

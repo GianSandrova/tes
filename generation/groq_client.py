@@ -23,9 +23,9 @@ def call_groq_api(prompt):
                 "model": GROQ_MODEL,
                 "messages": [{"role": "user", "content": prompt}],
                 "temperature": 0.3,
-                "max_tokens": 2000
+                "max_tokens": 10000
             },
-            timeout=30
+            timeout=120
         )
         response.raise_for_status()
         return response.json()["choices"][0]["message"]["content"]

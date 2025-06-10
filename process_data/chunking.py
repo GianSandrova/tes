@@ -26,7 +26,6 @@ def extract_ayah_number(ayah_key: str) -> int:
 
 def process_hadith_source(data, source_name, session):
     """
-    NEW: Fungsi ingesti Hadis yang dirombak total.
     - Membuat node :Kitab dan :Bab dengan embeddingnya sendiri.
     - Untuk setiap hadis, membuat rantai Chunk: (:Chunk {source:info})->(:Chunk {source:text})->(:Chunk {source:translation})
     - Node info hadis terhubung ke node :Bab.

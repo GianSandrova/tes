@@ -4,9 +4,6 @@ from retrieval.retrieval import vector_search_chunks_generator
 from retrieval.traversal import find_info_chunk_id, get_full_context_from_info
 
 def build_chunk_context_interleaved(query_text, top_k=5, min_score=0.6):
-    """
-    NEW: Logika disederhanakan karena adanya fungsi traversal universal.
-    """
     context = ""
     visited_info_ids = set()
 

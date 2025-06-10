@@ -308,8 +308,8 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Konten aplikasi
-st.title(":blue_book: Chatbot Al-Quran")
+# --- KONTEN APLIKASI ---
+st.title("📖 Chatbot Al-Quran")
 
 with st.sidebar:
     st.header("Tentang Aplikasi")
@@ -319,7 +319,6 @@ with st.sidebar:
     - Terjemahan resmi Kemenag RI
     - Penjelasan kontekstual menggunakan AI
     """)
-    
     st.markdown("**Contoh Pertanyaan:**")
     st.markdown("""
     - Jelaskan makna Surat Al-Fatihah ayat 1
@@ -327,53 +326,64 @@ with st.sidebar:
     - Jelaskan tafsir Surat Al-Baqarah ayat 255
     """)
 
-# Tampilkan riwayat chat
+# --- [PERBAIKAN UTAMA DI SINI] TAMPILKAN RIWAYAT CHAT ---
 for message in st.session_state.messages:
-    avatar = "💡" if message["role"] == "assistant" else "💭"
-    css_class = "assistant-message" if message["role"] == "assistant" else "user-message"
+    role = message["role"]
+    content = message["content"]
+    avatar = "💡" if role == "assistant" else "💭"
 
-    if message["role"] == "assistant" and message["content"].startswith("❌"):
-        css_class = "error-message"
-        avatar = "❌"
+    with st.chat_message(role, avatar=avatar):
+        # Terapkan logika pemformatan yang sama untuk SEMUA pesan
+        content_html = ""
+        css_class = ""
 
-    with st.chat_message(message["role"], avatar=avatar):
-        st.markdown(f'<div class="{css_class}">{message["content"]}</div>', unsafe_allow_html=True)
+        if role == "user":
+            css_class = "user-message"
+            # Selalu escape input pengguna untuk keamanan
+            content_html = f'<div class="{css_class}">{escape(content)}</div>'
 
-# Input chat
+        elif role == "assistant":
+            if content.startswith("❌"):
+                css_class = "error-message"
+                avatar = "❌" # Ganti avatar untuk error
+                content_html = f'<div class="{css_class}">{escape(content)}</div>'
+            else:
+                css_class = "assistant-message"
+                # INI LOGIKA KUNCI: Terapkan pada riwayat dan pesan baru
+                escaped_content = escape(content)
+                html_with_markup = markdown_to_html(escaped_content)
+                final_html = html_with_markup.replace('\n', '<br>')
+                content_html = f'<div class="{css_class}">{final_html}</div>'
+
+        st.markdown(content_html, unsafe_allow_html=True)
+
+
+# --- INPUT CHAT ---
 if prompt := st.chat_input("Masukkan pertanyaan Anda..."):
-    st.session_state.messages.append({"role": "user", "content": prompt, "avatar": "💭"})
+    # 1. Tambahkan pesan pengguna ke state dan tampilkan
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    st.rerun() # Memaksa muat ulang agar pesan pengguna langsung tampil dengan format yang benar
 
-    with st.chat_message("user", avatar="💭"):
-        st.markdown(f'<div class="user-message">{prompt}</div>', unsafe_allow_html=True)
-
+# Logika untuk memproses pesan baru jika pesan terakhir dari user
+if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
+    user_prompt = st.session_state.messages[-1]["content"]
     with st.spinner("🔍 Mencari jawaban..."):
         try:
-            answer = search_and_respond(prompt)
+            # 2. Dapatkan jawaban dari backend
+            answer = search_and_respond(user_prompt)
 
-            if answer.startswith("❌"):
-                error_msg = answer.replace("❌", "").strip()
-                with st.chat_message("assistant", avatar="❌"):
-                    st.markdown(f'<div class="error-message">{error_msg}</div>', unsafe_allow_html=True)
-                st.session_state.messages.append({"role": "assistant", "content": answer, "avatar": "❌"})
-                st.stop()
+            # 3. Tambahkan jawaban asisten ke state
+            st.session_state.messages.append({"role": "assistant", "content": answer})
 
-            # ⬇️ Konversi ke HTML dengan bold/italic support
-            escaped_answer = escape(answer)
-            html_answer = markdown_to_html(escaped_answer).replace('\n', '<br>')
-            formatted_answer = f'<div class="assistant-message">{html_answer}</div>'
-
-            with st.chat_message("assistant", avatar="💡"):
-                st.markdown(formatted_answer, unsafe_allow_html=True)
-
-            st.session_state.messages.append({"role": "assistant", "content": answer, "avatar": "💡"})
-
-            # Update history max 3
-            st.session_state.history.append((prompt, answer))
+            # Update history untuk LLM context
+            st.session_state.history.append((user_prompt, answer))
             if len(st.session_state.history) > 3:
                 st.session_state.history.pop(0)
+            
+            # 4. Tampilkan ulang seluruh chat
+            st.rerun()
 
         except Exception as e:
             error_msg = f"❌ Terjadi kesalahan sistem: {str(e)}"
-            with st.chat_message("assistant", avatar="❌"):
-                st.markdown(f'<div class="error-message">{error_msg}</div>', unsafe_allow_html=True)
-            st.session_state.messages.append({"role": "assistant", "content": error_msg, "avatar": "❌"})
+            st.session_state.messages.append({"role": "assistant", "content": error_msg})
+            st.rerun()
