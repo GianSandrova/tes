@@ -38,7 +38,12 @@ def build_chunk_context_interleaved(query_text, top_k=5, min_score=0.6):
                       f"Kitab: {row.get('kitab_name', '-')} | Bab: {row.get('bab_name', '-')}")
 
         print(f"🔍 Konteks dibangun dari info ID={info_id} | Skor: {similarity:.4f}")
-        print(f"   📚 Sumber: {sumber.replace('\n', ' ')}")
+        
+        # Lakukan replace di luar f-string
+        sumber_formatted = sumber.replace('\n', ' ')
+        
+        # Gunakan variabel yang sudah diformat di dalam f-string
+        print(f"   📚 Sumber: {sumber_formatted}") 
 
         context += f"""
 {sumber}
