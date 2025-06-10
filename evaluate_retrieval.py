@@ -34,7 +34,7 @@ def get_source_from_context_string(context_part: str) -> str | None:
 
 def run_retrieval_for_query(query: str, history: list = []) -> list[str]:
     """
-    Menjalankan alur retrieval dan MEMASTIKAN SEMUA HASIL DOKUMEN DIBACA.
+    Menjalankan alur retrieval dan memastikan SEMUA hasil dokumen diproses menjadi daftar.
     """
     print(f"\n---> Menjalankan retrieval untuk query: '{query}'")
     
@@ -62,31 +62,18 @@ def run_retrieval_for_query(query: str, history: list = []) -> list[str]:
     if not context_str:
         return []
 
-    # =================================================================
-    # == LANGKAH DEBUGGING: TAMBAHKAN PRINT DI BAWAH INI ==
-    # =================================================================
-    print("\n\n--- DEBUG: MEMERIKSA ISI VARIABEL ---")
-    print(f"--- DEBUG: Tipe dari context_str adalah: {type(context_str)} ---")
-    print("--- DEBUG: ISI LENGKAP context_str ---")
-    print(context_str)
-    print("--- AKHIR DARI ISI context_str ---\n")
-    # =================================================================
-
+    # Memecah string panjang menjadi daftar bagian-bagian dokumen
     context_parts = context_str.strip().split('---')
     
-    # =================================================================
-    # == LANGKAH DEBUGGING KEDUA: TAMBAHKAN PRINT DI BAWAH INI ==
-    # =================================================================
-    print(f"--- DEBUG: Jumlah bagian setelah di-split: {len(context_parts)} ---\n\n")
-    # =================================================================
-    
     retrieved_ids = []
+    # Loop ini akan memproses SEMUA bagian di dalam context_parts
     for part in context_parts:
         if part.strip():
             source_id = get_source_from_context_string(part)
             if source_id:
                 retrieved_ids.append(source_id)
-                
+    
+    # Return dieksekusi SETELAH loop selesai, sehingga mengembalikan daftar lengkap
     return retrieved_ids
 
 # ==============================================================================
