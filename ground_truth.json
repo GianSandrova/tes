@@ -7,27 +7,29 @@
     ]
   },
   {
-    "category": "Pertanyaan Langsung",
     "query": "bunyi hadis shahih bukhari nomor 1",
-    "expected_ids": ["📘 Hadis Shahih Bukhari No. 1 | Kitab: Wahyu | Bab: Bagaimana wahyu bermula"]
+    "expected_ids": [
+      "📘 Hadis Shahih Bukhari No. 1 | Kitab: Permulaan Wahyu | Bab: Permulaan wahyu"
+    ]
   },
   {
     "category": "Pertanyaan General",
     "query": "bagaimana cara rasulullah tidur",
     "expected_ids": [
-      "📘 Hadis Shahih Bukhari No. 5813 | Kitab: Meminta Izin | Bab: Telentang",
-      "📘 Hadis Shahih Bukhari No. 114 | Kitab: Ilmu | Bab: Membicarakan ilmu sebelum tidur"
+      "📘 Hadis Shahih Bukhari No. 5813 Kitab: Meminta Izin | Bab: Telentang",
+      "📘 Hadis Shahih Bukhari No. 114 Kitab: Ilmu | Bab: Membicarakan ilmu sebelum tidur",
+      "📘 Hadis Shahih Bukhari No. 6314 Kitab: Doa-doa | Bab: Tidur miring ke kanan"
     ]
   },
   {
     "category": "Pertanyaan General",
-    "query": "apa doa masuk wc",
+ "query": "apa doa masuk wc",
     "expected_ids": [
-      "📘 Hadis Jami` at-Tirmidzi No. 5 | Kitab: Bersuci | Bab: Doa masuk wc",
-      "📘 Hadis Jami` at-Tirmidzi No. 6 | Kitab: Bersuci | Bab: Doa masuk wc",
-      "📘 Hadis Shahih Bukhari No. 5847 | Kitab: Do`a | Bab: Doa masuk wc",
-      "📘 Hadis Shahih Bukhari No. 139 | Kitab: Wudlu | Bab: Bacaan do'a memasuki kamar kecil (WC)",
-      "📘 Hadis Shahih Bukhari No. 142 | Kitab: Wudlu | Bab: Apa yang diucapkan ketika masuk WC"
+      "📘 Hadis Jami` at-Tirmidzi No. 5 Kitab: Bersuci | Bab: Doa masuk wc",
+      "📘 Hadis Jami` at-Tirmidzi No. 6 Kitab: Bersuci | Bab: Doa masuk wc",
+      "📘 Hadis Shahih Bukhari No. 5847 Kitab: Do`a | Bab: Doa masuk wc",
+      "📘 Hadis Shahih Bukhari No. 139 Kitab: Wudlu | Bab: Bacaan do'a memasuki kamar kecil (WC)",
+      "📘 Hadis Shahih Bukhari No. 142 Kitab: Wudlu | Bab: Apa yang diucapkan ketika masuk WC"
     ]
   },
   {
@@ -42,11 +44,9 @@
   },
   {
     "category": "Bahasa Kolokial",
-    "query": "kalo mau keluar WC baca apaan sih?",
+   "query": "kalo mau keluar WC baca apaan sih?",
     "expected_ids": [
-      "📘 Hadis Jami` at-Tirmidzi No. 5 | Kitab: Bersuci | Bab: Doa masuk wc",
-      "📘 Hadis Shahih Bukhari No. 139 | Kitab: Wudlu | Bab: Bacaan do'a memasuki kamar kecil (WC)",
-      "📘 Hadis Shahih Bukhari No. 142 | Kitab: Wudlu | Bab: Apa yang diucapkan ketika masuk WC"
+        "📘 Hadis Jami` at-Tirmidzi No. 7 Kitab: Bersuci | Bab: Doa keluar wc"
     ]
   },
   {
@@ -60,17 +60,17 @@
     "category": "Bahasa Kolokial",
     "query": "gimana sih aturannya kalo ada cewek nawarin diri buat dinikahin?",
     "expected_ids": [
-      "📘 Hadis Shahih Bukhari No. 4726 | Kitab: Nikah | Bab: Seorang perempuan menawarkan dirinya kepada seorang laki-laki shalih",
-      "📘 Hadis Shahih Bukhari No. 4727 | Kitab: Nikah | Bab: Seorang perempuan menawarkan dirinya kepada seorang laki-laki shalih",
-      "📘 Hadis Shahih Bukhari No. 4721 | Kitab: Nikah | Bab: Bolehklan seorang wanita menghibahkan dirinya kepada seseorang?"
+      "📘 Hadis Shahih Bukhari No. 4726 Kitab: Nikah | Bab: Seorang perempuan menawarkan dirinya kepada seorang laki-laki shalih",
+      "📘 Hadis Shahih Bukhari No. 4727 Kitab: Nikah | Bab: Seorang perempuan menawarkan dirinya kepada seorang laki-laki shalih",
+      "📘 Hadis Shahih Bukhari No. 4721 Kitab: Nikah | Bab: Bolehklan seorang wanita menghibahkan dirinya kepada seseorang?"
     ]
   },
   {
     "category": "Dengan Cerita/Konteks",
     "query": "Saya pernah dengar cerita seorang sahabat yang mendatangi Nabi dan mengaku berzina, lalu dirajam. Bisa tolong carikan hadisnya di Bukhari?",
     "expected_ids": [
-      "📘 Hadis Shahih Bukhari No. 6430 | Kitab: Orang-orang yang diperangi | Bab: Rajam bagi pezina yang sudah menikah di mushalla atau tanah lapang",
-      "📘 Hadis Shahih Bukhari No. 6633 | Kitab: Hukum-hukum | Bab: Diberi keputusan di masjid, namun pelaksanaan hukuman diluar masjid"
+      "📘 Hadis Shahih Bukhari No. 6633 Kitab: Hukum-hukum | Bab: Diberi keputusan di masjid, namun pelaksanaan hukuman diluar masjid",
+      "📘 Hadis Shahih Bukhari No. 6430 Kitab: Orang-orang yang diperangi | Bab: Rajam bagi pezina yang sudah menikah di mushalla atau tanah lapang"
     ]
   },
   {
@@ -84,8 +84,8 @@
     "category": "Dengan Cerita/Konteks",
     "query": "Teman saya beli budak dari pasar, ternyata budaknya lagi hamil. Dia gak boleh langsung 'make' kan ya? Kayaknya ada hadis Tirmidzi soal ini.",
     "expected_ids": [
-      "📘 Hadis Jami` at-Tirmidzi No. 1050 | Kitab: Nikah | Bab: Membeli hamba sahaya ternyata sedang hamil",
-      "📘 Hadis Jami` at-Tirmidzi No. 1489 | Kitab: Ekspedisi | Bab: Dimakruhkan menggauli wanita tawanan hamil"
+      "📘 Hadis Jami` at-Tirmidzi No. 1050 Kitab: Nikah | Bab: Membeli hamba sahaya ternyata sedang hamil",
+      "📘 Hadis Jami` at-Tirmidzi No. 1489 Kitab: Ekspedisi | Bab: Dimakruhkan menggauli wanita tawanan hamil"
     ]
   },
   {
@@ -130,10 +130,10 @@
   },
   {
     "category": "Pertanyaan Lain (Negasi)",
-    "query": "hadis mana yang menyatakan bahwa tidak ada wasiat bagi ahli waris?",
+  "query": "hadis mana yang menyatakan bahwa tidak ada wasiat bagi ahli waris?",
     "expected_ids": [
-      "📘 Hadis Jami` at-Tirmidzi No. 2046 | Kitab: Wasiat | Bab: Tidak ada wasiat untuk ahli waris",
-      "📘 Hadis Jami` at-Tirmidzi No. 2032 | Kitab: Fara`idh | Bab: Warisan budak paling bawah"
+      "📘 Hadis Jami` at-Tirmidzi No. 2046 Kitab: Wasiat | Bab: Tidak ada wasiat untuk ahli waris",
+      "📘 Hadis Shahih Bukhari No. 2535 Kitab: Washiyat | Bab: Wasiat dan sabda Nabi Shallallahu 'alaihi wa Sallam"
     ]
   },
   {
@@ -149,23 +149,23 @@
     "expected_ids": [
       "📖 Surah: An-Nur | Ayat: 2",
       "📖 Surah: An-Nur | Ayat: 3",
-      "📘 Hadis Shahih Bukhari No. 6329 | Kitab: Hukum hudud | Bab: Pezina yang belum menikah dicambuk dan diasingkan"
+      "📘 Hadis Shahih Bukhari No. 6329 Kitab: Hukum hudud | Bab: Pezina yang belum menikah dicambuk dan diasingkan"
     ]
   },
   {
     "category": "Dengan Cerita/Konteks",
-    "query": "Al-Quran mengatur hukuman fisik bagi pelaku zina, yaitu dicambuk. Di surah dan ayat berapa aturan hukuman cambuk ini disebutkan?",
+      "query": "Al-Quran mengatur hukuman fisik bagi pelaku zina, yaitu dicambuk. Di surah dan ayat berapa aturan hukuman cambuk ini disebutkan?",
     "expected_ids": [
+      "📘 Hadis Shahih Bukhari No. 2455 Kitab: Kesaksian | Bab: Persaksian orang yang menuduh, pencuri dan pezina",
       "📖 Surah: An-Nur | Ayat: 2",
-      "📘 Hadis Shahih Bukhari No. 6329 | Kitab: Hukum hudud | Bab: Pezina yang belum menikah dicambuk dan diasingkan",
-      "📘 Hadis Shahih Bukhari No. 2455 | Kitab: Kesaksian | Bab: Persaksian orang yang menuduh, pencuri dan pezina"
+      "📘 Hadis Shahih Bukhari No. 6329 Kitab: Hukum hudud | Bab: Pezina yang belum menikah dicambuk dan diasingkan"
     ]
   },
   {
     "category": "Pertanyaan Lain (Spesifik)",
     "query": "bagaimana islam memandang perbuatan liwath?",
     "expected_ids": [
-      "📘 Hadis Jami` at-Tirmidzi No. 1376 | Kitab: Hukum Hudud | Bab: Hukuman liwath (homoseksual)",
+      "📘 Hadis Jami` at-Tirmidzi No. 1376 Kitab: Hukum Hudud | Bab: Hukuman liwath (homoseksual)",
       "📖 Surah: An-Nisa' | Ayat: 16"
     ]
   }
