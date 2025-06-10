@@ -31,7 +31,9 @@ def get_source_from_context_string(context_part: str) -> str | None:
     return None
 
 def run_retrieval_for_query(query: str, history: list = []) -> list[str]:
-    """Menjalankan alur retrieval sistem Anda untuk satu query."""
+    """
+    Menjalankan alur retrieval sistem Anda dan MEMASTIKAN SEMUA HASIL DOKUMEN DIBACA.
+    """
     print(f"\n---> Menjalankan retrieval untuk query: '{query}'")
     
     combined_query = ""
@@ -52,14 +54,25 @@ def run_retrieval_for_query(query: str, history: list = []) -> list[str]:
                 print(f"✅ Keyword match found: {sumber}")
                 return [sumber]
 
+    # Panggil fungsi inti untuk mendapatkan seluruh blok konteks
     context_str = build_chunk_context_interleaved(combined_query, top_k=5, min_score=0.6)
 
     if not context_str:
         return []
 
+    # === BAGIAN PENTING YANG DIPERBAIKI ===
+    # Pisahkan konteks menjadi beberapa bagian per dokumen (dipisahkan oleh '---')
     context_parts = context_str.strip().split('---')
-    retrieved_ids = [get_source_from_context_string(part) for part in context_parts if part.strip()]
-    return [id for id in retrieved_ids if id]
+    
+    retrieved_ids = []
+    # Loop melalui setiap bagian untuk mendapatkan semua sumber
+    for part in context_parts:
+        if part.strip():
+            source_id = get_source_from_context_string(part)
+            if source_id:
+                retrieved_ids.append(source_id)
+                
+    return retrieved_ids
 
 # ==============================================================================
 # == BAGIAN 3: KALKULASI MRR (LOGIKA BARU)                                    ==

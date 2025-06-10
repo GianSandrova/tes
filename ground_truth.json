@@ -44,8 +44,10 @@
   },
   {
     "category": "Bahasa Kolokial",
-    "query": "bagaimana cara wudhu Rasulullah yang benar",
+   "query": "bagaimana cara wudhu Rasulullah yang benar",
     "expected_ids": [
+      "📘 Hadis Jami` at-Tirmidzi No. 45 Kitab: Bersuci | Bab: Cara wudhu Rasulullah",
+      "📖 Surah: Al-Ma'idah | Ayat: 6",
       "📘 Hadis Shahih Bukhari No. 159 Kitab: Wudlu | Bab: Wudlu' tiga kali-tiga kali",
       "📘 Hadis Shahih Bukhari No. 164 Kitab: Wudlu | Bab: Berkumur-kumur dalam berwudlu"
     ]
