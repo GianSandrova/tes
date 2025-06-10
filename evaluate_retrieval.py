@@ -30,9 +30,11 @@ def get_source_from_context_string(context_part: str) -> str | None:
         return ' '.join(match.group(1).strip().split())
     return None
 
+# Di dalam file evaluate_retrieval.py
+
 def run_retrieval_for_query(query: str, history: list = []) -> list[str]:
     """
-    Menjalankan alur retrieval dan MEMASTIKAN SEMUA HASIL DOKUMEN DIPROSES MENJADI DAFTAR.
+    Menjalankan alur retrieval dan MEMASTIKAN SEMUA HASIL DOKUMEN DIBACA.
     """
     print(f"\n---> Menjalankan retrieval untuk query: '{query}'")
     
@@ -60,20 +62,31 @@ def run_retrieval_for_query(query: str, history: list = []) -> list[str]:
     if not context_str:
         return []
 
-    # === INI BAGIAN PALING KRUSIAL ===
-    # Ia mengambil string panjang dari build_chunk_context_interleaved
-    # lalu memecahnya menjadi beberapa bagian berdasarkan '---'
+    # =================================================================
+    # == LANGKAH DEBUGGING: TAMBAHKAN PRINT DI BAWAH INI ==
+    # =================================================================
+    print("\n\n--- DEBUG: MEMERIKSA ISI VARIABEL ---")
+    print(f"--- DEBUG: Tipe dari context_str adalah: {type(context_str)} ---")
+    print("--- DEBUG: ISI LENGKAP context_str ---")
+    print(context_str)
+    print("--- AKHIR DARI ISI context_str ---\n")
+    # =================================================================
+
     context_parts = context_str.strip().split('---')
     
+    # =================================================================
+    # == LANGKAH DEBUGGING KEDUA: TAMBAHKAN PRINT DI BAWAH INI ==
+    # =================================================================
+    print(f"--- DEBUG: Jumlah bagian setelah di-split: {len(context_parts)} ---\n\n")
+    # =================================================================
+    
     retrieved_ids = []
-    # Loop ini akan berjalan untuk SETIAP bagian, tidak hanya yang pertama
     for part in context_parts:
         if part.strip():
             source_id = get_source_from_context_string(part)
             if source_id:
                 retrieved_ids.append(source_id)
-    
-    # Hasilnya adalah daftar yang berisi BANYAK item, bukan satu
+                
     return retrieved_ids
 
 # ==============================================================================
