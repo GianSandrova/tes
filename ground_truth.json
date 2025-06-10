@@ -1,108 +1,108 @@
-{
-  "Apa isi dari Al-Fatihah ayat 6?": [
-    "al-fatihah:6"
-  ],
-  "Apa tafsir Al-Fatihah ayat 7 menurut Kemenag?": [
-    "al-fatihah:7"
-  ],
-  "Apa makna 'jalan yang lurus' dalam Al-Fatihah?": [
-    "al-fatihah:6",
-    "al-fatihah:7"
-  ],
-  "Apa isi perintah Allah tentang salat tepat waktu?": [
-    "al-'ankabut:45",
-    "al-mu'minun:9",
-    "an-nisa':103"
-  ],
-  "pada surah al-hujurat ayat 12 Apa larangan Al-Qur’an terhadap ghibah?": [
-    "al-hujurat:12"
-  ],
-  "Apa perintah Allah kepada manusia terhadap orang tua dalam Al-Isra’?": [
-    "al-isra':23"
-  ],
-  "Apa isi dari Al-Baqarah ayat 155 dan 156 terkait musibah?": [
-    "al-baqarah:155",
-    "al-baqarah:156"
-  ],
-  "Apa penjelasan tentang umat terbaik dalam Ali 'Imran ayat 110?": [
-    "ali'imran:110"
-  ],
-    "Apa maksud 'salat mencegah perbuatan keji dan mungkar' dalam Al-Ankabut ayat 45?": [
-      "al-'ankabut:45"
+[
+  {
+    "category": "Pertanyaan Langsung",
+    "query": "apa isi surah al-fatihah ayat 7",
+    "expected_id": "📖 Surah: Al-Fatihah | Ayat: 7"
+  },
+  {
+    "category": "Pertanyaan Langsung",
+    "query": "bunyi hadis tirmidzi nomor 1036",
+    "expected_id": "📘 Hadis Jami` at-Tirmidzi No. 1036 | Kitab: Nikah | Bab: Menikahi wanita kemudian mencerai sebelum senggama"
+  },
+  {
+    "category": "Pertanyaan General",
+    "query": "bagaimana cara rasulullah tidur",
+    "expected_id": "📘 Hadis Shahih Bukhari No. 6314 | Kitab: Doa-doa | Bab: Tidur miring ke kanan"
+  },
+  {
+    "category": "Pertanyaan General",
+    "query": "apa doa masuk wc",
+    "expected_id": "📘 Hadis Shahih Bukhari No. 142 | Kitab: Wudlu | Bab: Apa yang diucapkan ketika masuk WC"
+  },
+  {
+    "category": "Pertanyaan General",
+    "query": "apa yang dimaksud dengan jalan yang lurus dalam islam",
+    "expected_id": "📖 Surah: Al-Fatihah | Ayat: 6"
+  },
+  {
+    "category": "Bahasa Kolokial",
+    "query": "kalo mau masuk kakus baca apaan sih?",
+    "expected_id": "📘 Hadis Shahih Bukhari No. 142 | Kitab: Wudlu | Bab: Apa yang diucapkan ketika masuk WC"
+  },
+  {
+    "category": "Bahasa Kolokial",
+    "query": "jangan deketin zina, itu ayat mana ya?",
+    "expected_id": "📖 Surah: Al-Isra' | Ayat: 32"
+  },
+  {
+    "category": "Bahasa Kolokial",
+    "query": "gimana sih aturannya kalo ada cewek nawarin diri buat dinikahin?",
+    "expected_id": "📘 Hadis Shahih Bukhari No. 4721 | Kitab: Nikah | Bab: Bolehklan seorang wanita menghibahkan dirinya kepada seseorang?"
+  },
+  {
+    "category": "Dengan Cerita/Konteks",
+    "query": "Saya pernah dengar cerita seorang sahabat yang mendatangi Nabi dan mengaku berzina, lalu dirajam. Bisa tolong carikan hadisnya di Bukhari?",
+    "expected_id": "📘 Hadis Shahih Bukhari No. 6430 | Kitab: Orang-orang yang diperangi | Bab: Rajam bagi pezina yang sudah menikah di mushalla atau tanah lapang"
+  },
+  {
+    "category": "Dengan Cerita/Konteks",
+    "query": "Dalam Al-Quran kan ada larangan untuk tidak hanya melakukan zina, tapi bahkan mendekatinya saja tidak boleh. Di surah mana ayat spesifik yang melarang 'mendekati' perbuatan itu?",
+    "expected_id": "📖 Surah: Al-Isra' | Ayat: 32"
+  },
+  {
+    "category": "Dengan Cerita/Konteks",
+    "query": "Teman saya beli budak dari pasar, ternyata budaknya lagi hamil. Dia gak boleh langsung 'make' kan ya? Kayaknya ada hadis Tirmidzi soal ini.",
+    "expected_id": "📘 Hadis Jami` at-Tirmidzi No. 1050 | Kitab: Nikah | Bab: Membeli hamba sahaya ternyata sedang hamil"
+  },
+  {
+    "category": "Pertanyaan Multiturn",
+    "queries": [
+      "apa isi surah al-fil ayat 1 dan 2?",
+      "siapakah pasukan bergajah yang dimaksud dalam surah itu?"
     ],
-    "Apa perintah Allah tentang menjaga waktu salat dalam An-Nisa' ayat 103?": [
-      "an-nisa':103"
+    "expected_id": "📖 Surah: Al-Fil | Ayat: 1"
+  },
+  {
+    "category": "Pertanyaan Multiturn",
+    "queries": [
+      "jelaskan tentang hukuman bagi pencuri dalam islam",
+      "apakah hukuman itu berlaku untuk semua nilai barang curian?"
     ],
-    "Apa larangan berprasangka buruk dalam Al-Hujurat ayat 12?": [
-      "al-hujurat:12"
-    ],
-    "Apa perintah berbuat baik kepada orang tua dalam Al-Isra' ayat 23?": [
-      "al-isra':23"
-    ],
-    "Pada surah al-hujurat ayat 13 Apa alasan manusia diciptakan bersuku-suku": [
-      "al-hujurat:13"
-    ],
-    "Apa hikmah di balik musibah menurut Al-Baqarah ayat 155 dan 156?": [
-      "al-baqarah:155",
-      "al-baqarah:156"
-    ],
-    "Apa ciri-ciri umat terbaik dalam Ali 'Imran ayat 110?": [
-      "ali'imran:110"
-    ],
-      "Apa itu riba menurut Al-Qur’an?": [
-        "al-baqarah:275",
-        "ali'imran:130",
-        "an-nisa':161",
-        "ar-rum:39"
-      ],
-      "Apa perintah Allah untuk berlaku adil dalam Al-Qur’an?": [
-        "an-nahl:90",
-        "al-ma'idah:8",
-        "al-hadid:25"
-      ],
-      "Apa perintah Allah terkait menutup aurat dalam Al-Qur’an?": [
-        "an-nur:31",
-        "al-ahzab:59",
-        "an-nur:60"
-      ],
-      "Apa isi pesan tauhid dalam surat Al-Ikhlas?": [
-        "al-ikhlas:1",
-        "al-ikhlas:2",
-        "al-ikhlas:3",
-        "al-ikhlas:4"
-      ],
-      "Apa isi ayat tentang kewajiban menunaikan amanah?": [
-        "an-nisa':58",
-        "al-mu’minun:8",
-        "al-ahzab:72"
-      ],
-        "Apa isi dari Al-Fil ayat 1 tentang pasukan bergajah?": [
-          "al-fil:1"
-        ],
-        "Bagaimana Allah mengazab pasukan bergajah menurut Al-Fil ayat 4?": [
-          "al-fil:4"
-        ],
-        "Apa isi dari Al-Ikhlas ayat 1 tentang tauhid?": [
-          "al-ikhlas:1"
-        ],
-        "Apa makna Allah sebagai 'tempat bergantung' dalam Al-Ikhlas ayat 2?": [
-          "al-ikhlas:2"
-        ],
-        "Apa penegasan dalam Al-Ikhlas ayat 3 bahwa Allah tidak beranak?": [
-          "al-ikhlas:3"
-        ],
-        "Apa isi Al-Ikhlas ayat 4 tentang tidak ada yang setara dengan Allah?": [
-          "al-ikhlas:4"
-        ],
-        "Apa isi dari Surah Al-Ma’un ayat 5?": [
-          "al-ma'un:5"
-        ],
-        "Apa isi Surah Al-Ma’un ayat 7?": [
-          "al-ma'un:7"
-        ],
-        "Apa isi ayat 6 dari Surah Al-Kafirun mengenai agama masing-masing?": [
-          "al-kafirun:6"
-        ]
-      
+    "expected_id": "📖 Surah: Al-Ma'idah | Ayat: 38"
+  },
+  {
+    "category": "Pertanyaan Lain (Perbandingan)",
+    "query": "apa beda hukuman zina di surah An-Nur dan An-Nisa?",
+    "expected_id": "📖 Surah: An-Nur | Ayat: 2"
+  },
+  {
+    "category": "Pertanyaan Lain (Sebab Turunnya Ayat)",
+    "query": "apa sebab turunnya ayat tentang larangan mendekati shalat saat mabuk?",
+    "expected_id": "📖 Surah: An-Nisa' | Ayat: 43"
+  },
+  {
+    "category": "Pertanyaan Lain (Negasi)",
+    "query": "hadis mana yang menyatakan bahwa tidak ada wasiat bagi ahli waris?",
+    "expected_id": "📘 Hadis Jami` at-Tirmidzi No. 2046 | Kitab: Wasiat | Bab: Tidak ada wasiat untuk ahli waris"
+  },
+  {
+    "category": "Pertanyaan Langsung",
+    "query": "jelaskan kandungan surah an-nur ayat 2",
+    "expected_id": "📖 Surah: An-Nur | Ayat: 2"
+  },
+  {
+    "category": "Pertanyaan General",
+    "query": "hukum cambuk bagi pezina yang belum menikah",
+    "expected_id": "📖 Surah: An-Nur | Ayat: 2"
+  },
+  {
+    "category": "Dengan Cerita/Konteks",
+    "query": "Al-Quran mengatur hukuman fisik bagi pelaku zina, yaitu dicambuk. Di surah dan ayat berapa aturan hukuman cambuk ini disebutkan?",
+    "expected_id": "📖 Surah: An-Nur | Ayat: 2"
+  },
+  {
+    "category": "Pertanyaan Lain (Spesifik)",
+    "query": "bagaimana islam memandang perbuatan liwath?",
+    "expected_id": "📖 Surah: An-Nisa' | Ayat: 16"
   }
-  
+]
